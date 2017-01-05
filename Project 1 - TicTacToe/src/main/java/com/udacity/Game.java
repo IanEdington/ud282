@@ -149,8 +149,26 @@ public class Game {
      * @return String indicating the outcome of the game: "X wins" or "O wins" or "Tie" or "None"
      */
     public String checkGameWinner(char [][]grid){
-        String result = "None";
+        String result = "Tie";
         //Student code goes here ...
+        //
+        // Horizontal & Vertical
+        for (int i = 0; i < 3; i++) {
+            result = setOfThreeMatch(result, grid[i][0], grid[i][1], grid[i][2]);
+            result = setOfThreeMatch(result, grid[0][i], grid[1][i], grid[2][i]);
+        }
+
+        // Cross Axis
+        result = setOfThreeMatch(result, grid[0][0], grid[1][1], grid[2][2]);
+        result = setOfThreeMatch(result, grid[0][2], grid[1][1], grid[2][0]);
+
+        return result;
+    }
+
+    private String setOfThreeMatch(String result, char x, char y, char z) {
+        if (result.contains("win")) return result;
+        if (x == '-' || y == '-' || z == '-') return "None";
+        if (x == y && y == z) return x+" wins";;
         return result;
     }
 
